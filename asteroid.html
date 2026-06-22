@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset ="UTF-8">
+    <meta name="viewport" content="width=device-width, inital-scale=1.0">
+    <title>NEO Radar Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NEO RADAR TERMINAL</h1>
+            <p>Live Near-Earth Object Tracking Terminal</p>
+        </header>
+
+        <div id="hazard-alert-box" class="alert-box hidden">
+            <span class="alert-icon">⚠️</span>
+            <div class ="alert-text">
+                <h3>CRTICAL HAZARD WARNING</h3>
+                <p id="hazard-text">Loading proximity telemetry...</p>
+            </div>
+        </div>
+            
+        <!-- Metric Counter Grid -->
+
+        <section class="stats-grid">
+            <div class="card">
+                <h3> Total Tracked Today </h3>
+                <p id="stats-total" class="stat-number">--</p>
+            </div>
+            <div class="card hazard-card">
+                <h3>Hazardous Objects</h3>
+                <p id="stat-hazards" class="stat-number">--</p>
+            </div>
+        </section>
+
+        <!-- Filtering Controls (interactive)-->
+
+        <section class="control-row">
+            <input type='text' id="search-input" placeholder="Search by asteroid name ...">
+            <select id="sort-select">
+                <option value ="none">Sort Data by ... </option>
+                <option value ="size">Diameter (Largest) </option>
+                <option value ="speed">Velocity (Fastest) </option>
+                <option value ="distance">Miss Distance (Closest) </option>
+            </select>
+        </section>
+
+
+    </div>
+</body>
