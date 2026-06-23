@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset ="UTF-8">
-    <meta name="viewport" content="width=device-width, inital-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEO Radar Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,18 +15,16 @@
 
         <div id="hazard-alert-box" class="alert-box hidden">
             <span class="alert-icon">⚠️</span>
-            <div class ="alert-text">
-                <h3>CRTICAL HAZARD WARNING</h3>
+            <div class="alert-text">
+                <h3>CRITICAL HAZARD WARNING</h3>
                 <p id="hazard-text">Loading proximity telemetry...</p>
             </div>
         </div>
-            
-        <!-- Metric Counter Grid -->
 
         <section class="stats-grid">
             <div class="card">
-                <h3> Total Tracked Today </h3>
-                <p id="stats-total" class="stat-number">--</p>
+                <h3>Total Tracked Today</h3>
+                <p id="stat-total" class="stat-number">--</p>
             </div>
             <div class="card hazard-card">
                 <h3>Hazardous Objects</h3>
@@ -34,40 +32,39 @@
             </div>
         </section>
 
-        <!-- Filtering Controls (interactive)-->
-
         <section class="control-row">
-            <input type='text' id="search-input" placeholder="Search by asteroid name ...">
+            <input type="text" id="search-input" placeholder="Search by asteroid name ...">
             <select id="sort-select">
-                <option value ="none">Sort Data by ... </option>
-                <option value ="size">Diameter (Largest) </option>
-                <option value ="speed">Velocity (Fastest) </option>
-                <option value ="distance">Miss Distance (Closest) </option>
+                <option value="none">Sort Data by ... </option>
+                <option value="size">Diameter (Largest) </option>
+                <option value="speed">Velocity (Fastest) </option>
+                <option value="distance">Miss Distance (Closest) </option>
             </select>
+            <a href="game.html" style="text-decoration: none">
+                <button id="launch-game-btn" class="game-btn">Play Space Game</button>
+            </a>
         </section>
-           
-        <!-- Main Radar Logs -->
-         <main class="table-container">
+
+        <main class="table-container">
             <table>
                 <thead>
-                <tr>
-                    <th>Object Name</th>
-                    <th>Max Diameter</th>
-                    <th>Miss Distance</th>
-                    <th>Status</th>
-                </tr>
+                    <tr>
+                        <th>Object Name</th>
+                        <th>Max Diameter</th>
+                        <th>Velocity</th>
+                        <th>Miss Distance</th>
+                        <th>Status</th>
+                    </tr>
                 </thead>
                 <tbody id="asteroid-rows">
                     <tr><td colspan="5" style="text-align:center;">Initializing satellite link..</td></tr>
                 </tbody>
             </table>
-         </main>
+        </main>
     </div>
 
-    <!-- Size Scale Comparision Popup-->
-
     <div id="scale-modal" class="modal hidden">
-        <div class="modal=content">
+        <div class="modal-content">
             <span class="close-btn" id="close-modal-btn">&times;</span>
             <h2 id="modal-title">Asteroid Scale profile</h2>
             <div class="comparision-display">
@@ -81,3 +78,4 @@
 
     <script src="appradar.js"></script>
 </body>
+</html>
