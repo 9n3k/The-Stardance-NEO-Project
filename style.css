@@ -7,6 +7,11 @@
 }
 
 body {
+    background-image: url(space2.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     background-color: var(--bg-dark);
     color: var(--text-main);
     font-family: 'Courier New', Courier, monospace;
@@ -97,6 +102,7 @@ input:focus, select:focus {
     background-color: var(--card-bg);
     border:1px solid var(--border-color);
     border-radius: 6px;
+    margin-top: 35px
 }
 
 table {
@@ -161,4 +167,34 @@ th {background-color: rgba(0, 0, 0, 0.4); color: #8fa0b5;
     padding: 15px;
     border-left: 4px solid var(--neon-blue);
     margin-top: 15px;
+}
+
+input, select, .game-btn {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.game-btn {
+    background-color: var(--neon-green);
+    color: #ffffffff;
+    border: 1px solid var(--neon-green);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.game-btn:hover {
+    opacity: 0.9;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+}
+
+.input:focus, select:focus {
+    border-color: var(--neon-green);
 }
