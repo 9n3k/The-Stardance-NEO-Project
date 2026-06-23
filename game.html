@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroid Destroyer: Core Terminal</title>
+    <script src="https://jsdelivr.net"></script>
+    <script src="https://jsdelivr.net" crossorigin="anonymous"></script>
+    <script src="https://jsdelivr.net" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --bg-dark: #0b0f19;
+            --card-bg: #161b26;
+            --neon-green: #00ff66;
+            --neon-red: #ff3333;
+            --neon-blue: #00d9ff;
+            --text-main: #f0f4f8;
+        }
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 20px;
+            width: 100%;
+            max-width: 1150px;
+            margin-top: 15px;
+        }
+        #ui-bar {
+            width: 100%;
+            max-width: 1150px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            box-sizing: border-box;
+            background: var(--card-bg);
+            border: 2px solid var(--neon-green);
+            border-radius: 6px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.6rem;
+            color: var(--neon-green);
+            letter-spacing: 2px;
+        }
+        .btn {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid #222d42;
+            padding: 10px 18px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .btn:hover { border-color: var(--neon-blue); }
+        #canvas-container {
+            border: 2px solid #222d42;
+            border-radius: 6px;
+            background-color: #000;
+            width: 840px;
+            height: 520px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .sidebar {
+            background-color: var(--card-bg);
+            border: 1px solid #222d42;
+            border-radius: 6px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .sidebar h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
+            color: var(--neon-blue);
+            border-bottom: 1px solid #222d42;
+            padding-bottom: 8px;
+        }
+        .shop-item {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid #222d42;
+            padding: 12px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .shop-item h3 { margin: 0; font-size: 1rem; }
+        .shop-item p { margin: 0; font-size: 0.8rem; color: #8fa0b5; }
+        .buy-btn {
+            background-color: var(--neon-blue);
+            color: #000;
+            border: none;
+            padding: 6px;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .buy-btn:disabled {
+            background-color: #222d42;
+            color: #555;
+            cursor: not-allowed;
+        }
+        .inventory-tag {
+            font-size: 0.8rem;
+            color: var(--neon-green);
+            font-weight: bold;
+        }
+        .hidden { display: none !important; }
+        #webcam-video { display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="ui-bar">
+        <header>
+            <h1>☄️ ASTEROID DESTROYER</h1>
+        </header>
+        <div id="tracking-status" style="color: var(--neon-red); font-weight: bold;">Camera: Connecting AI...</div>
+        <a href="index.html" class="btn">◀ Return to Radar</a>
+    </div>
+
+    <div class="layout-grid">
+        <div id="canvas-container"></div>
+        
+        <div class="sidebar">
+            <h2>🛸 HARVEST STATION</h2>
+            <div>CREDITS: <span id="credits-val" style="color: var(--neon-green); font-weight: bold; font-size: 1.3rem;">0</span></div>
+            
+            <div class="shop-item">
+                <h3>Upgrade Ship Hull</h3>
+                <p>Changes your visual core avatar footprint profile.</p>
+                <p>Cost: 15 Credits</p>
+                <button class="buy-btn" id="buy-hull" onclick="purchaseEquipment('hull', 15)">Buy Upgrade</button>
+                <span id="owned-hull" class="inventory-tag hidden">✓ INSTALLED</span>
+            </div>
+
+            <div class="shop-item">
+                <h3>Moon Rock Shield</h3>
+                <p>Deploys an orbit defense perimeter around your ship marker.</p>
+                <p>Cost: 40 Credits</p>
+                <button class="buy-btn" id="buy-shield" onclick="purchaseEquipment('shield', 40)">Buy Shield</button>
+                <span id="owned-shield" class="inventory-tag hidden">✓ ACTIVE ONLINE</span>
+            </div>
+        </div>
+    </div>
+
+    <video id="webcam-video" playsinline></video>
+
+
+    <script src="game.js"></script>
+</body>
+</html>
