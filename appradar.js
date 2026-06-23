@@ -1,7 +1,7 @@
 const CRTICIALAPI_TOKEN = "JWHcdmNX4BmlDhnKtyZhz4dsctCAKPNumAhNHEIb";
 
 const calendarDateStamp = new Date().toISOString().split('T')[0];
-const targetAPIEndpoint = `https://nasa.gov{calendarDateStamp}}&end_date=${calendarDateStamp}&api_key=${CRTICIALAPI_TOKEN}`;
+const targetAPIEndpoint = `https://nasa.gov{calendarDateStamp}&end_date=${calendarDateStamp}&api_key=${CRTICIALAPI_TOKEN}`;
 
 let Asteroidslist = [];
 
@@ -88,7 +88,55 @@ function launchComparisonModal(name, sizeMeters) {
     
     let comparisonText ="";
     if (sizeMeters < 50) {
-        comparisonText = `Estimated size: $(sizeMeters.toFixed(1)} meters.)`
+        comparisonText = `Estimated size: $(sizeMeters.toFixed(1)} meters.). Roughly comparable to a **standard commercial passenger plane**. Highly unlikely to puncture our atmosphere.`;
+    } else if (sizeMeters >= 50 && sizeMeters < 200) {
+        comparisonText = `Estimated size: ${sizeMeters.toFixed(1)} meters. Comparable to the **Big Ben Clock Tower** or an entire sports stadium block. Structural planetary hazard vector.`;
+    } else {
+        comparisonText = `Estimated size: ${sizeMeters.toFixed(1)} meters. Massive Scale! This object is matching or scalling past the **Eiffel Tower**. Severe planetary tracking footprint.`;
     }
 
+    document.getElementById("modal-size-text").innerHTML = comparisonText;
+    popup.classList.remove("hidden");
+
 }
+
+// Filtering for input and sorting control (logic)
+
+function attachControlEventHandlers() {
+    const searchField = document.getElementById("search-input");
+    const sortField = document.getElementById("sort-select");
+
+    function executeFilterProcessing() {
+        let textQuery = searchField.value.toLowerCase().trim();
+        let activeSortRule = sortField.value;
+
+     // ffa
+    if (activeSortRule === "size") {
+        modifiedSet.sort((a,b) => b.estimated_diameter.meters.estimated_diameter_max - a.estimated_diameter.meters.estimated_diameter_max);
+    } else if (activeSortRule === "speed") {
+        modifiedSet.sort((a,b) => parseFloat(a.close_approach_data[0].relative_velocity.kilometers_per_hour) - parseFloat(a.close_approach_data[0].relative_velocity.kilometers_per_hour));
+    }else if (activeSortRule === "distance") {
+        modifiedSet.sort((a,b) => parseFloat(a.close_approach_data[0].miss_distance.kilometers) - parseFloat(b.close_approach_data[0].miss_distance.kilometers));
+    }
+
+    refreshInterfaceDisplay(modifiedSet);
+
+    }
+    searchField.addEventListener('input', executeFilterProcessing);
+    sortField.addEventListener('change', executeFilterProcessing);
+
+    document.getElementById("close-modal-btn").addEventListener('click', () => {
+        document.getElementById("scale-modal").classList.add("hidden");
+    })
+}
+
+function launchSpaceGame() {
+    alert("Initializing Asteroid Defense Game System...");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const gameBtn = document.getElementById("launch-game-btn");
+    if (gameBtn) {
+        gameBtn.addEventListener("click", launchSpaceGame);
+    }
+});
